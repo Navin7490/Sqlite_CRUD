@@ -43,7 +43,7 @@ public class ViewAll_Adapter extends RecyclerView.Adapter<ViewAll_Adapter.viewho
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewAll_Adapter.viewholder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewAll_Adapter.viewholder holder, final int position) {
         holder.tvid.setText(product.get(position).getId());
         holder.tvname.setText(name.concat(product.get(position).getName()));
         holder.tvemail.setText(email.concat(product.get(position).getEmail()));
@@ -52,6 +52,25 @@ public class ViewAll_Adapter extends RecyclerView.Adapter<ViewAll_Adapter.viewho
         byte[]image=product.get(position).getImage();
         Bitmap bitmap= BitmapFactory.decodeByteArray(image,0,image.length);
         holder.imageView.setImageBitmap(bitmap);
+        holder.tvupdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+             String id=   product.get(position).getId();
+             String name=product.get(position).getName();
+             String email=product.get(position).getEmail();
+             String mobile=product.get(position).getMobile();
+             String gender=product.get(position).getGender();
+                Intent intent=new Intent(context.getApplicationContext(),UpdateData_Activity.class);
+                intent.putExtra("id",id);
+                intent.putExtra("name",name);
+                intent.putExtra("email",email);
+                intent.putExtra("mobile",mobile);
+                intent.putExtra("gender",gender);
+
+                context.startActivity(intent);
+
+            }
+        });
 
     }
 
@@ -62,7 +81,7 @@ public class ViewAll_Adapter extends RecyclerView.Adapter<ViewAll_Adapter.viewho
 
     public class viewholder extends RecyclerView.ViewHolder {
         ImageView imageView;
-        TextView tvid, tvname,tvemail,tvmobile,tvgender,tvdelete;
+        TextView tvid, tvname,tvemail,tvmobile,tvgender,tvdelete,tvupdate;
         public viewholder(@NonNull View itemView) {
             super(itemView);
             imageView=itemView.findViewById(R.id.Im_viewall);
@@ -72,6 +91,9 @@ public class ViewAll_Adapter extends RecyclerView.Adapter<ViewAll_Adapter.viewho
             tvmobile=itemView.findViewById(R.id.Mobile);
             tvgender=itemView.findViewById(R.id.Gender);
             tvdelete=itemView.findViewById(R.id.Delete);
+            tvupdate=itemView.findViewById(R.id.Update);
+
+
             tvdelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -90,6 +112,7 @@ public class ViewAll_Adapter extends RecyclerView.Adapter<ViewAll_Adapter.viewho
 
                 }
             });
+
         }
     }
 }

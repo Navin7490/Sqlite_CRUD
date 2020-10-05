@@ -71,7 +71,11 @@ public class MainActivity extends AppCompatActivity {
                 email = etemail.getText().toString();
                 password = etpassword.getText().toString();
                 mobile = etmobile.getText().toString();
-                if (name.isEmpty() || email.isEmpty() || password.isEmpty() || mobile.isEmpty()) {
+                if (imageuri==null){
+                    Toast.makeText(MainActivity.this, "selcet image", Toast.LENGTH_SHORT).show();
+
+                }
+               else if (name.isEmpty() || email.isEmpty() || password.isEmpty() || mobile.isEmpty()) {
                     Toast.makeText(MainActivity.this, "Required filled", Toast.LENGTH_SHORT).show();
                 } else if (!rbtnmale.isChecked() && !rbtnfemal.isChecked()) {
                     Toast.makeText(MainActivity.this, "selcet gender", Toast.LENGTH_SHORT).show();

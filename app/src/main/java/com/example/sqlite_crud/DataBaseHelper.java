@@ -90,6 +90,18 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
          return   db.delete(TABLE_NAME,"Id=?",new String[]{id});
     }
+    public boolean UpdateData(String id,String name,String email,String mobile,String gender){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv=new ContentValues();
+        cv.put(ID,id);
+        cv.put(NAME,name);
+        cv.put(EMAIL,email);
+        cv.put(MOBILE,mobile);
+        cv.put(GENDER,gender);
+
+        db.update(TABLE_NAME,cv,"Id=?",new String[]{id});
+          return true;
+    }
 
 }
 
